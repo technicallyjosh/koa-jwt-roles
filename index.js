@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = roles => {
+module.exports = function (roles) {
     if (typeof roles === 'string') {
         roles = [roles];
     }
@@ -10,8 +10,8 @@ module.exports = roles => {
             return yield next;
         }
 
-        const userRoles = this.state.user.roles;
-        const foundRoles = roles.filter(r => userRoles.some(ur => ur === r));
+        var userRoles = this.state.user.roles || [];
+        var foundRoles = roles.filter(r => userRoles.some(ur => ur === r));
 
         if (!foundRoles.length) {
             this.throw(403);
