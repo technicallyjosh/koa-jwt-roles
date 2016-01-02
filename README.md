@@ -1,6 +1,8 @@
 # koa-jwt-roles
 Koa role middleware for use with koa-jwt.
 
+**Written for NodeJS 4+**
+
 `npm i -S koa-jwt-roles`
 
 This module checks against the context user decoded by koa-jwt.
