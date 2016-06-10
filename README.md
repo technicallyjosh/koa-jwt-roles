@@ -1,6 +1,8 @@
 # koa-jwt-roles
 Koa role middleware for use with koa-jwt.
 
+[![npm version](https://badge.fury.io/js/koa-jwt-roles.svg)](https://badge.fury.io/js/koa-jwt-roles)
+
 **Written for NodeJS 4+**
 
 `npm i -S koa-jwt-roles`
