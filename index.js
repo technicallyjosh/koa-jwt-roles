@@ -1,22 +1,24 @@
 'use strict';
 
-module.exports = roles => {
-    if (typeof roles === 'string') {
-        roles = [roles];
-    }
-
-    return function* (next) {
-        if (!this.state || !this.state.user) {
-            return yield next;
+module.exports = function koaJwtRoles(roles) {
+    return async function(ctx, next) {
+        if (typeof roles === 'string') {
+            roles = [roles];
         }
 
-        const userRoles = this.state.user.roles || [];
+        if (!ctx.state || !ctx.state.user) {
+            await next();
+
+            return;
+        }
+
+        const userRoles = ctx.state.user.roles || [];
         const foundRoles = roles.filter(r => userRoles.some(ur => ur === r));
 
         if (!foundRoles.length) {
-            this.throw(403);
+            ctx.throw(403);
         }
 
-        yield next;
+        await next();
     };
 };

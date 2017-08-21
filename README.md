@@ -3,7 +3,9 @@ Koa role middleware for use with koa-jwt.
 
 [![npm version](https://badge.fury.io/js/koa-jwt-roles.svg)](https://badge.fury.io/js/koa-jwt-roles)
 
-**Written for NodeJS 4+**
+**Written for Koa 2 with Node 7.6+**
+
+*For the Koa 1 version, use the latest 0.x version.*
 
 `npm i -S koa-jwt-roles`
 
@@ -11,16 +13,16 @@ This module checks against the context user decoded by koa-jwt.
 
 ## Simple usage:
 ```js
-... app, koa-jwt, koa-router
-const roles  = require('koa-jwt-roles');
+//... app, koa-jwt, koa-router
+const roles = require('koa-jwt-roles');
 
 // single check
-router.get('/', roles('admin'), function* () {
+router.get('/', roles('admin'), async function (ctx) {
     // if the jwt has admin in roles, this will hit
 });
 
 // multiple check
-router.get('/', roles(['admin', 'moderator']), function* () {
+router.get('/', roles(['admin', 'moderator']), async function (ctx) {
     // if the jwt has admin or moderator, this will hit
 });
 ```
@@ -36,7 +38,7 @@ const roles = require('koa-jwt-roles');
 
 router.use(roles('admin'));
 
-router.get('/user/:id', function* () {
+router.get('/user/:id', async function (ctx) {
     // admin can access this
 });
 ```
